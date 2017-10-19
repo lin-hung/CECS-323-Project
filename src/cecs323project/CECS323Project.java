@@ -32,8 +32,7 @@ public class CECS323Project {
                             + "3. List all publishers\n"
                             + "4. List all the data for a pubisher specified by the user (include all tables)\n"
                             + "5. List all book titles\n"
-                            + "6. List all the data for a book specified by the user. \n"
-                            + "This includes all the data for the associated publisher and writing group.\n"
+                            + "6. List all the data for a book specified by the user. This includes all the data for the associated publisher and writing group.\n"
                             + "7. Insert a new book\n"
                             + "8. Insert a new publisher and update all book published by one publisher to be published by the new pubisher.\n"
                             + "9. Remove a book specified by the user.\n"
@@ -57,24 +56,43 @@ public class CECS323Project {
                             }
                             break;
                         case 2:
-//                            sql = "SELECT * FROM WritingGroups";
-//                            rs = statement.executeQuery(sql);
-//                            System.out.println("Which group?");
-//                            String str;
-//                            while (true) {
-//                                try {
-//                                    str = scanner.next();
-//                                } catch (Exception e) {
-//                                    continue;
-//                                }
-//                                while(rs.next()){
-//                                    if(rs.getString("groupName").equals(str))
-//                                }
-//
-//                                break;
+                            sql = "SELECT * FROM WritingGroups";
+                            rs = statement.executeQuery(sql);
+                            String str;
+                            while (true) {
+                                try {
+                                    System.out.println("Which group?");
+                                    str = scanner.next();
+                                   
+                                    System.out.println("####"+str);
+                                } catch (Exception e) {
+                                    continue;
+                                }
+                                int success=0; 
+                                while (rs.next()) {
+                                    if (rs.getString("groupName").equals(str)) {
+                                        //nat join with books, then print out the data
+                                        sql = "SELECT * FROM WritingGroups NATURAL JOIN Books WHERE groupName="
+                                                + "'" + str + "'";
+                                        rs = statement.executeQuery(sql);
+                                        
+                                        ResultSetMetaData metadata = rs.getMetaData();
+                                        int columnCount = metadata.getColumnCount();
+                                        System.out.print('\n');
+                                         rs.next();
+                                        for (int i = 1; i <= columnCount; i++) {
+                                            String columnName = metadata.getColumnName(i);
+                                            System.out.println(columnName+'\t'+rs.getString(columnName));
+                                        }
+                                        success=1;
+                                    }
+                                    else success=0;
+                                }
+                                if(success==1){
+                                    break;
+                                }
+                                else System.out.println("####continue");
                             }
-
-                            //List all the data for a group specified by the user (include all tables)
                             break;
                         case 3:
                             //List all publishers
