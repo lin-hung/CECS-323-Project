@@ -12,6 +12,9 @@ import java.sql.*;
 * or any other operations provided.                  *
 *****************************************************/
 
+
+////////TEST PUSH
+
 public class Database {
     public Connection conn; //once a connection is established it stays
                      //as long as the code that created this
@@ -29,7 +32,7 @@ public class Database {
         }
   //In the string to getConnection you may replace "MP3Player"      
         try {
-           // conn = DriverManager.getConnection("jdbc:derby://localhost:1527/help;create=true;user=lin;password=abc");
+            //user:abc no password
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/project;create=true");
 
             stat = conn.createStatement();

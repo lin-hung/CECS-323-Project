@@ -7,10 +7,10 @@ import java.util.logging.Logger;
 public class CECS323Project {
 
     public static void main(String[] args) {
-        Database db;
-        Connection conn;
-        Statement statement;
-
+         Database db;
+         Connection conn;
+         Statement statement;
+           
         try {
             db = new Database();
             conn = db.conn;
