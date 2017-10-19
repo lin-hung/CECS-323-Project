@@ -15,6 +15,13 @@ public class CECS323Project {
             db = new Database();
             conn = db.conn;
             statement = conn.createStatement();
+            
+            
+            String sql="SELECT * FROM BOOKS";
+             ResultSet rs = statement.executeQuery(sql);
+            rs.next();
+            System.out.println(rs.getString("bookTitle"));
+            
         } catch (SQLException ex) {
             Logger.getLogger(CECS323Project.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -22,7 +29,7 @@ public class CECS323Project {
         } catch (Exception ex) {
             Logger.getLogger(CECS323Project.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("success");
+      
     }
 
 }
