@@ -30,7 +30,7 @@ public class Database {
   //In the string to getConnection you may replace "MP3Player"      
         try {
            // conn = DriverManager.getConnection("jdbc:derby://localhost:1527/help;create=true;user=lin;password=abc");
-            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/project");
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/project;create=true");
 
             stat = conn.createStatement();
             } catch (SQLException ex) {
