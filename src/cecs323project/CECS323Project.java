@@ -56,42 +56,28 @@ public class CECS323Project {
                             }
                             break;
                         case 2:
-                            sql = "SELECT * FROM WritingGroups";
-                            rs = statement.executeQuery(sql);
                             String str;
+                            scanner.nextLine();
                             while (true) {
-                                try {
-                                    System.out.println("Which group?");
-                                    str = scanner.next();
-                                   
-                                    System.out.println("####"+str);
-                                } catch (Exception e) {
-                                    continue;
-                                }
-                                int success=0; 
+                                sql = "SELECT * FROM WritingGroups NATURAL JOIN Books";
+                                rs = statement.executeQuery(sql);
+                                System.out.println("Which group would you like information on?");
+                                str = scanner.nextLine();
+                                boolean success = false;
                                 while (rs.next()) {
                                     if (rs.getString("groupName").equals(str)) {
-                                        //nat join with books, then print out the data
-                                        sql = "SELECT * FROM WritingGroups NATURAL JOIN Books WHERE groupName="
-                                                + "'" + str + "'";
-                                        rs = statement.executeQuery(sql);
-                                        
                                         ResultSetMetaData metadata = rs.getMetaData();
                                         int columnCount = metadata.getColumnCount();
-                                        System.out.print('\n');
-                                         rs.next();
                                         for (int i = 1; i <= columnCount; i++) {
                                             String columnName = metadata.getColumnName(i);
-                                            System.out.println(columnName+'\t'+rs.getString(columnName));
+                                            System.out.println(columnName + '\t' + rs.getString(columnName));
                                         }
-                                        success=1;
+                                        success = true;
                                     }
-                                    else success=0;
                                 }
-                                if(success==1){
+                                if (success) {
                                     break;
                                 }
-                                else System.out.println("####continue");
                             }
                             break;
                         case 3:
@@ -100,10 +86,33 @@ public class CECS323Project {
                             rs = statement.executeQuery(sql);
                             while (rs.next()) {
                                 System.out.println(rs.getString("publisherName"));
-                            }
+                            } 
                             break;
                         case 4:
                             //List all the data for a pubisher specified by the user (include all tables)
+                            scanner.nextLine();
+                            while (true) {
+                                sql = "SELECT * FROM Publishers NATURAL JOIN Books";
+                                rs = statement.executeQuery(sql);
+                                System.out.println("Which publisher would you like information on?");
+                                str = scanner.nextLine();
+                                System.out.println("#####publisherName="+str);
+                                boolean success = false;
+                                while (rs.next()) {
+                                    if (rs.getString("publisherName").equals(str)) {
+                                        ResultSetMetaData metadata = rs.getMetaData();
+                                        int columnCount = metadata.getColumnCount();
+                                        for (int i = 1; i <= columnCount; i++) {
+                                            String columnName = metadata.getColumnName(i);
+                                            System.out.println(columnName + '\t' + rs.getString(columnName));
+                                        }
+                                        success = true;
+                                    }
+                                }
+                                if (success) {
+                                    break;
+                                }
+                            }
                             break;
                         case 5:
                             //List all book titles
@@ -115,6 +124,7 @@ public class CECS323Project {
                             break;
                         case 6:
                             //List all the data for a book specified by the user.
+                            
                             break;
                         case 7:
                             //Insert a new book
