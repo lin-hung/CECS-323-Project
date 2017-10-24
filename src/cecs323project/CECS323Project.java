@@ -43,7 +43,6 @@ public class CECS323Project {
                     continue;
                 }
                 if (input == 0) {
-                    System.out.println("#####");
                     break;
                 } else {
                     switch (input) {
@@ -96,7 +95,6 @@ public class CECS323Project {
                                 rs = statement.executeQuery(sql);
                                 System.out.println("Which publisher would you like information on?");
                                 str = scanner.nextLine();
-                                System.out.println("#####publisherName="+str);
                                 boolean success = false;
                                 while (rs.next()) {
                                     if (rs.getString("publisherName").equals(str)) {
@@ -130,7 +128,6 @@ public class CECS323Project {
                                 rs = statement.executeQuery(sql);
                                 System.out.println("Which book would you like information on?");
                                 str = scanner.nextLine();
-                                System.out.println("#####bookTitle="+str);
                                 boolean success = false;
                                 while (rs.next()) {
                                     if (rs.getString("bookTitle").equals(str)) {
